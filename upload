@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ "$#" -ne 2 ]; then
+  echo "Usage: $0 serial_port filename.hex"
+  exit 1
+fi
+
+SERIAL_PORT=$1
+HEX_FILE=$2
+
+
+/Path/to/avrdude -C/Path/to/avrdude.conf -v -pattiny202 -cjtag2updi -P$SERIAL_PORT -b115200 -Ufuse0:w:0b00000000:m -Ufuse1:w:0x0:m -Ufuse2:w:0x01:m -Ufuse4:w:0x0:m -Ufuse5:w:0xc4:m -Ufuse6:w:0x7:m -Ufuse7:w:0x00:m -Ufuse8:w:0x00:m -Uflash:w:$HEX_FILE:i
